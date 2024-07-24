@@ -8,9 +8,10 @@
 /*********************
  *      INCLUDES
  *********************/
-#include <cstdio>
+#include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <time.h>
 #include "lv_hal.h"
 #include "../misc/lv_mem.h"
 #include "../misc/lv_gc.h"
@@ -19,7 +20,6 @@
 #include "../core/lv_refr.h"
 #include "../core/lv_theme.h"
 #include "../draw/sw/lv_draw_sw.h"
-#include "../common/device.h"
 
 #if LV_USE_THEME_DEFAULT
     #include "../extra/themes/default/lv_theme_default.h"
@@ -159,19 +159,6 @@ void lv_disp_draw_buf_init(lv_disp_draw_buf_t * draw_buf, void * buf1, void * bu
  */
 lv_disp_t * lv_disp_drv_register(lv_disp_drv_t * driver)
 {
-    // TO IMPLEMENT
-    // a method to check for hdmi state
-    char * hdmi_state_file="/sys/devices/platform/soc/6000000.hdmi/extcon/hdmi/state";
-    FILE * f = fopen(hdmi_state_file, "r");
-    int state = fgetc(f);
-
-    if (state == 1){
-        driver.hor_res = device.SCREEN.WIDTH;
-        driver.ver_res = device.SCREEN.HEIGHT;
-        driver.sw_rotate = 0;
-        driver.rotated = 0;
-    }
-
     lv_disp_t * disp = _lv_ll_ins_head(&LV_GC_ROOT(_lv_disp_ll));
     LV_ASSERT_MALLOC(disp);
     if(!disp) {

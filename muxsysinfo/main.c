@@ -578,6 +578,7 @@ int main(int argc, char *argv[]) {
     disp_drv.ver_res = device.SCREEN.HEIGHT;
     disp_drv.sw_rotate = device.SCREEN.ROTATE;
     disp_drv.rotated = device.SCREEN.ROTATE;
+    lv_disp_hdmi_rotate(&disp_drv);
     lv_disp_drv_register(&disp_drv);
 
     load_config(&config);
