@@ -20,6 +20,7 @@
 #include "../core/lv_refr.h"
 #include "../core/lv_theme.h"
 #include "../draw/sw/lv_draw_sw.h"
+#include "../../drivers/display/fbdev.h"
 
 #if LV_USE_THEME_DEFAULT
     #include "../extra/themes/default/lv_theme_default.h"
@@ -164,6 +165,9 @@ lv_disp_t * lv_disp_drv_register(lv_disp_drv_t * driver)
     if(!disp) {
         return NULL;
     }
+
+    //check if the device is hdmi and swap the resolution accordingly if it has a rotated screen
+    fbdev_hdmi_rotate(driver);
 
     /*Create a draw context if not created yet*/
     if(driver->draw_ctx == NULL) {

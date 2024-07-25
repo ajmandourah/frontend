@@ -52,7 +52,6 @@ typedef enum {
  * Check for hdmi state and adapt according to the current device
  * @param disp driver pointer to display driver which active screen should be get.
  */
-void lv_disp_hdmi_rotate(lv_disp_drv_t * driver);
 
 /**
  * Return with a pointer to the active screen
